@@ -1,0 +1,12 @@
+@import '../mixin/shadow';
+
+$shadow-name: 'mv-shadow';
+
+@for $i from 1 through 24 {
+  .#{$shadow-name}-#{$i} {
+    @include createShadow($i);
+  }
+}
+.#{$shadow-name}-shadow-0 {
+  box-shadow: none !important;
+}

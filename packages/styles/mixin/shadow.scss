@@ -1,0 +1,5 @@
+@mixin createShadow($depth) {
+  $shadow: map-get($shadow-depth, shadow-depth-#{$depth});
+
+  box-shadow: $shadow;
+}

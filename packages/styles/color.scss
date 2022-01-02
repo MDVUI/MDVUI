@@ -1,9 +1,0 @@
-.mv-color-blue {
-  background-color: #3A7AFE !important;
-}
-
-@for $i from 1 through 10 {
-  .mv-color-blue-#{$i} {
-    background-color: rgba(58, 122, 254, .6 + ($i*.04)) !important;
-  }
-}

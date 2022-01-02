@@ -1,0 +1,30 @@
+$color-name: 'mv-color';
+
+@mixin createBgColor($name, $color) {
+  .#{$color-name}-#{$name} {
+    background-color: $color !important;
+  }
+}
+
+@mixin createRangeBgColor($colorName, $mv-color) {
+  @include createBgColor($colorName, map-get($mv-color, light-1));
+  @for $i from 1 through 6 {
+    @include createBgColor(
+      '#{$colorName}-light-#{$i}',
+      map-get($mv-color, light-#{$i})
+    );
+    @if ($i <= 5) {
+      @include createBgColor(
+        '#{$colorName}-accent-#{$i}',
+        map-get($mv-color, accent-#{$i})
+      );
+
+      @if ($i <= 4) {
+        @include createBgColor(
+          '#{$colorName}-dark-#{$i}',
+          map-get($mv-color, dark-#{$i})
+        );
+      }
+    }
+  }
+}

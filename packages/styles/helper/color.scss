@@ -1,0 +1,6 @@
+/* 蓝色 */
+@include createRangeBgColor('blue', $mv-color-blue);
+/* 红色 */
+@include createRangeBgColor('red', $mv-color-red);
+/* 绿色 */
+@include createRangeBgColor('green', $mv-color-green);
