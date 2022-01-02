@@ -3,12 +3,12 @@
 </script>
 
 <template>
-  <MvButton class="mdui-color-red-50" :ripple-color="'red'">
+  <mv-button class="mv-color-red" :ripple-color="'blue'">
     Hi
-  </MvButton>
-  <MvSnackbar>
-    这是一条提示
-  </MvSnackbar>
+  </mv-button>
+  <mv-message success>
+    11
+  </mv-message>
 </template>
 
 <style lang="scss">

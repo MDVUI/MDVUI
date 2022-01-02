@@ -12,12 +12,16 @@ export default defineConfig({
     alias: {
       '@mdvui/components': resolve('packages/components'),
       '@mdvui/utils': resolve('packages/utils'),
+      '@mdvui/styles': resolve('packages/styles'),
     },
   },
   css: {
     preprocessorOptions: {
       scss: {
-
+        additionalData: `
+          @import '@mdvui/styles/mixin/index.scss';
+          @import '@mdvui/styles/variable/index.scss';
+        `,
       },
     },
   },

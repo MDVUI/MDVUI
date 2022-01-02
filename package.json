@@ -9,6 +9,7 @@
   "dependencies": {
     "element-plus": "^1.2.0-beta.6",
     "mdui": "^1.0.2",
+    "prettier": "^2.5.1",
     "vue": "^3.2.25",
     "vue-demi": "^0.12.1"
   },

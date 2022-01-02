@@ -1,8 +1,8 @@
 import MuButton from '@mdvui/components/Button'
-import MuSnackbar from '@mdvui/components/Snackbar'
+import MuAlertTip from '@mdvui/components/Message'
 import type { Plugin } from 'vue-demi'
 
 export default [
   MuButton,
-  MuSnackbar,
+  MuAlertTip,
 ] as unknown as Plugin[]

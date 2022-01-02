@@ -1,0 +1,6 @@
+node_modules
+dist
+/packages/components/
+/packages/MDVUI/
+/packages/utils/
+/vite.config.ts
