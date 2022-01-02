@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"],
+    "isolatedModules": true,
+    "baseUrl": "./",
+    "paths": {
+      "@mdvui/components/*": ["packages/components/*"],
+      "@mdvui/styles/*": ["packages/styles/*"],
+      "@mdvui/utils/*": ["packages/utils/*"]
+    }
+  },
+  "include": ["packages", "example"]
+}
