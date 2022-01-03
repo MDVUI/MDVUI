@@ -15,7 +15,8 @@
     "paths": {
       "@mdvui/components/*": ["packages/components/*"],
       "@mdvui/styles/*": ["packages/styles/*"],
-      "@mdvui/utils/*": ["packages/utils/*"]
+      "@mdvui/utils/*": ["packages/utils/*"],
+      "@mdvui/plugins/*": ["packages/plugins/*"]
     }
   },
   "include": ["packages", "example"]

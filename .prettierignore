@@ -4,3 +4,4 @@ dist
 /packages/MDVUI/
 /packages/utils/
 /vite.config.ts
+/packages/components/

@@ -1,19 +1,20 @@
 <script lang='ts' setup>
 import { computed, onMounted, ref, useAttrs } from 'vue-demi'
-
 import { isExistAttr, removeDom } from '@mdvui/utils/dom'
+import type { AlertTipPos, AlertTipType } from '@mdvui/components/Message/src/message-types'
 
-export type AlertTipType = 'success' |'error'| 'info' | 'warning'
-export type AlertTipPos = 'top' | 'right' | 'bottom' | 'left' | 'right-top' | 'right-bottom' | 'left-top' | 'left-bottom'
-interface Props {
+export interface IMessageProps {
   type?: AlertTipType
   pos?: AlertTipPos
   duration?: number
+  showClose?: boolean
 }
-const props = withDefaults(defineProps<Props>(), {
+
+const props = withDefaults(defineProps<IMessageProps>(), {
   type: 'info',
   pos: 'right-top',
   duration: 3000,
+  showClose: false,
 })
 
 const Style = computed(() => {
@@ -24,7 +25,13 @@ const Style = computed(() => {
     side = 'auto'
   }
 })
+
 const attrs = useAttrs()
+const error = computed(() => isExistAttr(attrs, 'error'))
+const info = computed(() => isExistAttr(attrs, 'info'))
+const success = computed(() => isExistAttr(attrs, 'success'))
+const isDefault = computed(() => !(info.value || error.value || success.value))
+
 const rootRef = ref<HTMLDivElement>()
 onMounted(() => {
   setTimeout(() => {
@@ -36,10 +43,6 @@ onMounted(() => {
   }, props.duration * 500000)
 })
 
-const error = computed(() => isExistAttr(attrs, 'error'))
-const info = computed(() => isExistAttr(attrs, 'info'))
-const success = computed(() => isExistAttr(attrs, 'success'))
-const isDefault = computed(() => !(info.value || error.value || success.value))
 </script>
 <template>
   <div

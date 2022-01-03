@@ -8,7 +8,7 @@
       "brace-style": [2, "1tbs", { "allowSingleLine": true }],
       "no-useless-return": "off",
       "prefer-const": "off",
-      "no-unused-expressions": "off"
+      "no-unused-expressions": "off",
     }
   }]
 }

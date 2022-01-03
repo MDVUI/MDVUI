@@ -13,6 +13,7 @@ export default defineConfig({
       '@mdvui/components': resolve('packages/components'),
       '@mdvui/utils': resolve('packages/utils'),
       '@mdvui/styles': resolve('packages/styles'),
+      '@mdvui/plugins': resolve('packages/plugins'),
     },
   },
   css: {

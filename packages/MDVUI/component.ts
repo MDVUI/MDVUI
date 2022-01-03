@@ -1,8 +1,8 @@
-import MuButton from '@mdvui/components/Button'
-import MuAlertTip from '@mdvui/components/Message'
+import MvButton from '@mdvui/components/Button'
+import MvMessage from '@mdvui/components/Message'
 import type { Plugin } from 'vue-demi'
 
 export default [
-  MuButton,
-  MuAlertTip,
+  MvButton,
+  MvMessage,
 ] as unknown as Plugin[]
