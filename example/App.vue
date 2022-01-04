@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { useGlobalConfig } from '@mdvui/hooks/use-global-config'
 
+console.log(useGlobalConfig('zIndex'))
 </script>
 
 <template>

@@ -14,6 +14,7 @@ export default defineConfig({
       '@mdvui/utils': resolve('packages/utils'),
       '@mdvui/styles': resolve('packages/styles'),
       '@mdvui/plugins': resolve('packages/plugins'),
+      '@mdvui/hooks': resolve('packages/hooks'),
     },
   },
   css: {

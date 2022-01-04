@@ -16,8 +16,10 @@
       "@mdvui/components/*": ["packages/components/*"],
       "@mdvui/styles/*": ["packages/styles/*"],
       "@mdvui/utils/*": ["packages/utils/*"],
-      "@mdvui/plugins/*": ["packages/plugins/*"]
-    }
+      "@mdvui/plugins/*": ["packages/plugins/*"],
+      "@mdvui/hooks/*": ["packages/hooks/*"],
+      "@mdvui/tokens/*": ["packages/tokens/*"],
+    },
   },
-  "include": ["packages", "example"]
+  "include": ["packages", "example"],
 }

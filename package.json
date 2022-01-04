@@ -7,6 +7,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vueuse/core": "^7.5.1",
     "element-plus": "^1.2.0-beta.6",
     "mdui": "^1.0.2",
     "prettier": "^2.5.1",
