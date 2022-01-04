@@ -10,9 +10,9 @@ import { ConfigProviderKey } from '../../tokens/config-provider'
 
 const defaultInject = ref<ConfigProviderKeyProps>({})
 
-export const useGlobalConfig = (
-  key?: keyof ConfigProviderKeyProps,
-): Ref<number | undefined> | undefined => {
+export const useGlobalConfig = <T extends keyof ConfigProviderKeyProps>(
+  key?: T,
+): Ref<ConfigProviderKeyProps[T]> | undefined => {
   const config = inject(ConfigProviderKey, defaultInject)
   if (key) {
     return isObject(config) && hasOwn(config, key)
