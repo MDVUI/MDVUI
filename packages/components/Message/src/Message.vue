@@ -1,7 +1,6 @@
 <script lang='ts' setup>
 import type { VNode } from 'vue-demi'
-import { computed, onMounted, ref } from 'vue-demi'
-import { removeDom } from '@mdvui/utils/dom'
+import { computed, onBeforeMount, ref } from 'vue-demi'
 import type { MessagePos, MessageType } from '@mdvui/components/Message/src/message-types'
 
 export interface IMessageProps {
@@ -11,6 +10,7 @@ export interface IMessageProps {
   showClose?: boolean
   zIndex?: number
   message?: string | VNode
+  offset?: number
 }
 export interface IMessageEmits {
   (e: 'destroy'): void
@@ -22,8 +22,8 @@ const props = withDefaults(defineProps<IMessageProps>(), {
   duration: 3000,
   showClose: false,
   message: '',
+  offset: 20,
 })
-
 const emits = defineEmits<IMessageEmits>()
 
 const Style = computed(() => {
@@ -36,6 +36,7 @@ const Style = computed(() => {
 
   return {
     zIndex: props.zIndex,
+    top: `${props.offset || 0}px`,
   }
 })
 
@@ -44,14 +45,10 @@ const info = computed(() => props.type === 'info')
 const success = computed(() => props.type === 'success')
 const isDefault = computed(() => !!props.type)
 
-const rootRef = ref<HTMLDivElement>()
-onMounted(() => {
+const render = ref(true)
+onBeforeMount(() => {
   setTimeout(() => {
-    rootRef.value!.style.transform = 'top: 0;'
-    rootRef.value!.style.opacity = '0'
-    setTimeout(() => {
-      removeDom(rootRef)
-    }, 250)
+    render.value = false
   }, props.duration)
 })
 
@@ -65,8 +62,9 @@ function destroy() {
     @after-leave="destroy"
   >
     <div
+      v-if="render"
       ref="rootRef"
-      class="mv-alert-tip mdui-text-color-white mv-shadow-3"
+      class="mv-message mv-text-color-white mv-shadow-3"
       :class="[
         info ? 'mv-color-blue': '',
         error ? 'mv-color-red': '',

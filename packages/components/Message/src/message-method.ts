@@ -9,6 +9,17 @@ interface MessageOptions extends IMessageProps {
   appendTo?: HTMLElement | string
 }
 
+let instances: VNode[] = []
+
+const onClose = () => {
+  instances.forEach((vm, index) => {
+    if (index > 0) {
+      instances[index].component!.props.offset = instances[index - 1].component!.props.offset
+    }
+  })
+  instances.shift()
+}
+
 const message = (options: MessageOptions | string) => {
   if (typeof options === 'string') {
     options = { message: options }
@@ -28,8 +39,15 @@ const message = (options: MessageOptions | string) => {
     ...options,
   }
 
+  let verticalOffset = options.offset || 20
+  instances.forEach((vInstance) => {
+    verticalOffset += (vInstance.el?.offsetHeight || 0) + 16
+  })
+
+  props.offset = verticalOffset
+
   const container = document.createElement('div')
-  container.className = 'mv-container'
+  container.className = 'mv-message-container'
 
   const vm = createVNode(
     MessageConstructor,
@@ -38,9 +56,11 @@ const message = (options: MessageOptions | string) => {
   )
 
   vm.props!.onDestroy = () => {
+    onClose()
     render(null, container)
   }
 
+  instances.push(vm)
   render(vm, container)
 
   appendTo.appendChild(container)

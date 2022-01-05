@@ -1,6 +1,14 @@
-/* 蓝色 */
+/* text */
+.mv-text-color-white {
+  color: #ffffff;
+}
+.mv-text-color-black {
+  color: #000000;
+}
+
+/* blue */
 @include createRangeBgColor('blue', $mv-color-blue);
-/* 红色 */
+/* red */
 @include createRangeBgColor('red', $mv-color-red);
-/* 绿色 */
+/* green */
 @include createRangeBgColor('green', $mv-color-green);

@@ -1,0 +1,47 @@
+@import './mixins/mixins';
+
+@include createStyles('message') {
+  min-height: 40px;
+  width: 30%;
+  min-width: 300px;
+  border-radius: 3px;
+  position: absolute;
+  right: 2.5%;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  transition: top 0.3s, opacity 0.3s linear;
+  max-width: 60px;
+  animation: message 0.25s ease;
+  &-slot {
+    flex: 10;
+    text-align: start;
+  }
+  i {
+    padding-right: 10px;
+  }
+  @include media('mt') {
+    margin: 0 2.5%;
+  }
+  @keyframes message {
+    from {
+      top: 0;
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+      top: 5%;
+    }
+  }
+}
+.#{$namespace}-message-fade-enter-from,
+.#{$namespace}-message-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+.#{$namespace}-message-fade-enter-to,
+.#{$namespace}-message-fade-leave-from {
+  opacity: 1;
+  top: 20px;
+  transform: translateY(0);
+}

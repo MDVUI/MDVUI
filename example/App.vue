@@ -1,14 +1,11 @@
 <script setup lang="ts">
 import { MvMessageFn } from '@mdvui/components/Message'
-import { useGlobalConfig } from '@mdvui/hooks/use-global-config'
 
-console.log(useGlobalConfig())
 function message() {
   MvMessageFn({
-    duration: 5000,
+    duration: 2000,
     message: 'Hello World',
-    type: 'error',
-
+    type: 'success',
   })
 }
 </script>

@@ -1,0 +1,21 @@
+@import '../variables/variables.scss';
+
+@mixin createStyles($name) {
+  $selector: '#{$namespace}-#{$name}';
+
+  .#{$selector} {
+    @content;
+  }
+}
+
+@mixin media($currentDevice) {
+  @if $currentDevice == 'mt' {
+    @media screen and(max-width: $max-width) {
+      @content;
+    }
+  } @else if ($currentDevice == 'pc') {
+    @media screen and(min-width: $max-width) {
+      @content;
+    }
+  }
+}
