@@ -1,5 +1,4 @@
-import type { DataHTMLAttributes, Ref } from 'vue-demi'
-import { isUndefined } from '@mdvui/utils/isUndefined'
+import type { Ref } from 'vue-demi'
 
 export const removeDom = <T extends Ref>(el: T) => {
   if (el.value.remove) {
@@ -7,9 +6,6 @@ export const removeDom = <T extends Ref>(el: T) => {
   }
 }
 
-export const isExistAttr = (attrs: any, targetAttr: string) => {
-  if (!isUndefined(attrs[targetAttr])) {
-    return true
-  }
-  return false
-}
+// export const isExistAttr = (attrs: any, targetAttr: string) => {
+//   return !isUndefined(attrs[targetAttr]) || attrs[targetAttr] === ''
+// }

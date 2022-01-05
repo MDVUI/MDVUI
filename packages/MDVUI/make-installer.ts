@@ -5,9 +5,7 @@ import { version } from './version'
 
 export const makeInstaller = (components: Plugin[] = []) => {
   const install = (app: App, options: ConfigProviderKeyProps = {}) => {
-    if (!options.zIndex) {
-      options.zIndex = 2000
-    }
+    options.zIndex = options.zIndex || 2000
     provideGlobalConfig(options, app)
     components.forEach(c => app.use(c))
   }

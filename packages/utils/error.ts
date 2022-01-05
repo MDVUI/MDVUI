@@ -1,7 +1,7 @@
 class MDVUIError extends Error {
   constructor(m: string) {
     super(m)
-    this.name = 'ElementPlusError'
+    this.name = '[MDVUI Error]'
   }
 }
 

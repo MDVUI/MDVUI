@@ -1,7 +1,8 @@
-export type AlertTipType = 'success' |'error'| 'info' | 'warning'
-export type AlertTipPos = 'top' | 'right' | 'bottom' | 'left' | 'right-top' | 'right-bottom' | 'left-top' | 'left-bottom'
+export type MessageType = 'success' |'error'| 'info' | 'warning'
+export type MessagePos = 'top' | 'right' | 'bottom' | 'left' | 'right-top' | 'right-bottom' | 'left-top' | 'left-bottom'
+
 export interface IMessageProps {
-  type?: AlertTipType
-  pos?: AlertTipPos
+  type?: MessageType
+  pos?: MessagePos
   duration?: number
 }

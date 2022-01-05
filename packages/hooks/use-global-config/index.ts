@@ -5,19 +5,26 @@ import type { App, Ref } from 'vue-demi'
 import { debugWarn } from '@mdvui/utils/error'
 import { hasOwn } from '@mdvui/utils/utils'
 import { unref } from 'vue'
-import type { ConfigProviderKeyProps } from '../../tokens/config-provider'
+import type { ConfigProviderKeyProps, ExtractConfigProviderProps } from '../../tokens/config-provider'
 import { ConfigProviderKey } from '../../tokens/config-provider'
 
 const defaultInject = ref<ConfigProviderKeyProps>({})
 
-export const useGlobalConfig = <T extends keyof ConfigProviderKeyProps>(
+export function useGlobalConfig<T extends keyof ConfigProviderKeyProps>(
+  key: T
+): Ref<ConfigProviderKeyProps[T]>
+export function useGlobalConfig(): Ref<ExtractConfigProviderProps>
+export function useGlobalConfig<T extends keyof ConfigProviderKeyProps>(
   key?: T,
-): Ref<ConfigProviderKeyProps[T]> | undefined => {
-  const config = inject(ConfigProviderKey, defaultInject)
+) {
+  const config = inject(ConfigProviderKey, defaultInject) || defaultInject
+
   if (key) {
-    return isObject(config) && hasOwn(config, key)
+    return isObject(config.value) && hasOwn(config.value, key)
       ? computed(() => config.value[key])
       : undefined
+  } else {
+    return config as Ref<ConfigProviderKeyProps[T]>
   }
 }
 
@@ -35,14 +42,14 @@ export const provideGlobalConfig = (
     return undefined
   }
 
-  const provideFn = <T>(key: any, value: T) => {
-    app.provide(key, value)
+  const provideFn = (value: any) => {
+    app.provide(ConfigProviderKey, value)
   }
   const oldConfig = useGlobalConfig()
 
   const context = computed(() => Object.assign(unref(oldConfig) || {}, config))
 
-  provideFn(ConfigProviderKey, unref(context))
+  provideFn(unref(context))
 
   return context
 }

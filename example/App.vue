@@ -1,16 +1,20 @@
 <script setup lang="ts">
+import { MvMessageFn } from '@mdvui/components/Message'
 import { useGlobalConfig } from '@mdvui/hooks/use-global-config'
 
-console.log(useGlobalConfig('zIndex'))
+console.log(useGlobalConfig())
+function message() {
+  MvMessageFn({
+    duration: 5000,
+    message: 'Hello World',
+    type: 'error',
+
+  })
+}
 </script>
 
 <template>
-  <mv-button class="mv-color-red" :ripple-color="'blue'">
-    Hi
-  </mv-button>
-  <mv-message success>
-    11
-  </mv-message>
+  <mv-button class="mv-color-red" :ripple-color="'blue'" @click="message" v-text="'click'" />
 </template>
 
 <style lang="scss">

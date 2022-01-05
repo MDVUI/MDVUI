@@ -1,13 +1,19 @@
 <script lang='ts' setup>
-import { computed, onMounted, ref, useAttrs } from 'vue-demi'
-import { isExistAttr, removeDom } from '@mdvui/utils/dom'
-import type { AlertTipPos, AlertTipType } from '@mdvui/components/Message/src/message-types'
+import type { VNode } from 'vue-demi'
+import { computed, onMounted, ref } from 'vue-demi'
+import { removeDom } from '@mdvui/utils/dom'
+import type { MessagePos, MessageType } from '@mdvui/components/Message/src/message-types'
 
 export interface IMessageProps {
-  type?: AlertTipType
-  pos?: AlertTipPos
+  type?: MessageType
+  pos?: MessagePos
   duration?: number
   showClose?: boolean
+  zIndex?: number
+  message?: string | VNode
+}
+export interface IMessageEmits {
+  (e: 'destroy'): void
 }
 
 const props = withDefaults(defineProps<IMessageProps>(), {
@@ -15,7 +21,10 @@ const props = withDefaults(defineProps<IMessageProps>(), {
   pos: 'right-top',
   duration: 3000,
   showClose: false,
+  message: '',
 })
+
+const emits = defineEmits<IMessageEmits>()
 
 const Style = computed(() => {
   let side = '2.5%'
@@ -24,13 +33,16 @@ const Style = computed(() => {
   if (props.pos === 'top' || props.pos === 'bottom') {
     side = 'auto'
   }
+
+  return {
+    zIndex: props.zIndex,
+  }
 })
 
-const attrs = useAttrs()
-const error = computed(() => isExistAttr(attrs, 'error'))
-const info = computed(() => isExistAttr(attrs, 'info'))
-const success = computed(() => isExistAttr(attrs, 'success'))
-const isDefault = computed(() => !(info.value || error.value || success.value))
+const error = computed(() => props.type === 'error')
+const info = computed(() => props.type === 'info')
+const success = computed(() => props.type === 'success')
+const isDefault = computed(() => !!props.type)
 
 const rootRef = ref<HTMLDivElement>()
 onMounted(() => {
@@ -40,25 +52,33 @@ onMounted(() => {
     setTimeout(() => {
       removeDom(rootRef)
     }, 250)
-  }, props.duration * 500000)
+  }, props.duration)
 })
 
+function destroy() {
+  emits('destroy')
+}
 </script>
 <template>
-  <div
-    ref="rootRef"
-    class="mv-alert-tip mdui-text-color-white mv-shadow-3"
-    :class="[
-      info ? 'mv-color-blue': '',
-      error ? 'mv-color-red': '',
-      success ? 'mv-color-green': '',
-      isDefault ? 'mv-color-blue' : ''
-    ]"
-    :style="Style"
+  <transition
+    name="mv-message-fade"
+    @after-leave="destroy"
   >
-    <i class="mdui-icon material-icons" v-html="error || info || isDefault ? 'info': 'done'" />
-    <div class="mv-alert-tip-slot">
-      <slot />
+    <div
+      ref="rootRef"
+      class="mv-alert-tip mdui-text-color-white mv-shadow-3"
+      :class="[
+        info ? 'mv-color-blue': '',
+        error ? 'mv-color-red': '',
+        success ? 'mv-color-green': '',
+        isDefault ? 'mv-color-blue' : ''
+      ]"
+      :style="Style"
+    >
+      <i class="mdui-icon material-icons" v-html="error || info || isDefault ? 'info': 'done'" />
+      <div class="mv-alert-tip-slot">
+        {{ message }}
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
