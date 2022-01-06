@@ -11,11 +11,11 @@ interface MessageOptions extends IMessageProps {
 
 let instances: VNode[] = []
 
-const onClose = () => {
-  instances.forEach((vm, index) => {
-    if (index > 0) {
-      instances[index].component!.props.offset = instances[index - 1].component!.props.offset
-    }
+const onClose = (vm: VNode) => {
+  const removedHeight = vm.el?.offsetHeight
+  instances.forEach((instance, index) => {
+    const pos = removedHeight - 16
+    instances[index].component!.props.offsetHeight = pos
   })
   instances.shift()
 }
@@ -30,7 +30,7 @@ const message = (options: MessageOptions | string) => {
     appendTo = document.querySelector(options.appendTo)
   }
   if (!(appendTo instanceof HTMLElement)) {
-    debugWarn('MvMessage', 'the appendTo option is not an HTMLElement. Falling back to document.body.')
+    debugWarn('MvMessage', 'The appendTo option is not an HTMLElement. Falling back to document.body.')
     appendTo = document.body
   }
 
@@ -56,12 +56,13 @@ const message = (options: MessageOptions | string) => {
   )
 
   vm.props!.onDestroy = () => {
-    onClose()
+    onClose(vm)
     render(null, container)
   }
 
   instances.push(vm)
   render(vm, container)
+  console.log(vm.component)
 
   appendTo.appendChild(container)
 }

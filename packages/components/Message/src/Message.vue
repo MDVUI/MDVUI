@@ -1,6 +1,6 @@
 <script lang='ts' setup>
 import type { VNode } from 'vue-demi'
-import { computed, onBeforeMount, ref } from 'vue-demi'
+import { computed, onBeforeMount, ref, watch } from 'vue-demi'
 import type { MessagePos, MessageType } from '@mdvui/components/Message/src/message-types'
 
 export interface IMessageProps {
@@ -11,9 +11,7 @@ export interface IMessageProps {
   zIndex?: number
   message?: string | VNode
   offset?: number
-}
-export interface IMessageEmits {
-  (e: 'destroy'): void
+  onDestroy?: () => void
 }
 
 const props = withDefaults(defineProps<IMessageProps>(), {
@@ -23,10 +21,11 @@ const props = withDefaults(defineProps<IMessageProps>(), {
   showClose: false,
   message: '',
   offset: 20,
+  onDestroy: () => {},
 })
-const emits = defineEmits<IMessageEmits>()
 
 const Style = computed(() => {
+  const top = `${props.offset}px`
   let side = '2.5%'
   let upDown = '5%'
 
@@ -36,7 +35,7 @@ const Style = computed(() => {
 
   return {
     zIndex: props.zIndex,
-    top: `${props.offset || 0}px`,
+    top,
   }
 })
 
@@ -53,7 +52,7 @@ onBeforeMount(() => {
 })
 
 function destroy() {
-  emits('destroy')
+  props.onDestroy()
 }
 </script>
 <template>
