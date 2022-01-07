@@ -10,15 +10,7 @@ interface MessageOptions extends IMessageProps {
 }
 
 let instances: VNode[] = []
-
-const onClose = (vm: VNode) => {
-  const removedHeight = vm.el?.offsetHeight
-  instances.forEach((instance, index) => {
-    const pos = removedHeight - 16
-    instances[index].component!.props.offsetHeight = pos
-  })
-  instances.shift()
-}
+let seed = 0
 
 const message = (options: MessageOptions | string) => {
   if (typeof options === 'string') {
@@ -36,6 +28,10 @@ const message = (options: MessageOptions | string) => {
 
   const props = {
     zIndex: PopupManager.nextZIndex(),
+    id: seed++,
+    onClose: () => {
+      close(seed - 1)
+    },
     ...options,
   }
 
@@ -56,15 +52,42 @@ const message = (options: MessageOptions | string) => {
   )
 
   vm.props!.onDestroy = () => {
-    onClose(vm)
     render(null, container)
   }
 
   instances.push(vm)
   render(vm, container)
-  console.log(vm.component)
 
   appendTo.appendChild(container)
+
+  return {
+    close: () => close(vm.props!.id as number),
+  }
+}
+
+export const close = (vmId: number) => {
+  const idx = instances.findIndex(vm => vm.props!.id = vmId)
+
+  if (idx === -1) {
+    return
+  }
+
+  const vm = instances[idx]
+  const removedHeight = vm.el!.offsetHeight
+
+  instances.splice(idx, 1)
+
+  const len = instances.length
+  if (len === 0) {
+    return
+  }
+
+  for (let i = 0; i < len; i++) {
+    // TODO Why when using `offsetHeight` will cause bug? And use `style.top` it will be ok?
+    const pos = parseInt(instances[i].el!.style.top, 10) - removedHeight - 16
+
+    instances[i].component!.props.offset = pos
+  }
 }
 
 export default message

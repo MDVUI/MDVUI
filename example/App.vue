@@ -1,16 +1,22 @@
 <script setup lang="ts">
 import { MvMessageFn } from '@mdvui/components/Message'
+import { ref } from 'vue-demi'
+
+const input = ref()
 
 function message() {
   MvMessageFn({
     duration: 2000,
-    message: 'Hello World',
-    type: 'success',
+    message: 'Test',
+    type: input.value,
   })
 }
 </script>
 
 <template>
+  <div class="mdui-textfield" style="width: 50%; margin: 0 auto">
+    <input v-model="input" class="mdui-textfield-input" type="text" placeholder="error | info | success">
+  </div>
   <mv-button class="mv-color-red" :ripple-color="'blue'" @click="message" v-text="'click'" />
 </template>
 

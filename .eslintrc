@@ -10,7 +10,8 @@
       "prefer-const": "off",
       "no-unused-expressions": "off",
       "@typescript-eslint/no-unused-vars": "off", // If open this, it will create some unexcepted errors
-      "no-unused-vars": "error"  // best choice
+      "no-unused-vars": "error", // best choice
+      "@typescript-eslint/no-use-before-define": "off"
     }
   }]
 }

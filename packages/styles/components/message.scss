@@ -5,13 +5,14 @@
   width: 30%;
   min-width: 300px;
   border-radius: 3px;
-  position: absolute;
+  position: fixed;
   right: 2.5%;
   display: flex;
   align-items: center;
   padding: 10px 20px;
   max-width: 60px;
   animation: message 0.25s ease;
+  transition: all 0.2s ease;
   &-slot {
     flex: 10;
     text-align: start;
@@ -29,7 +30,6 @@
     }
     to {
       opacity: 1;
-      top: 5%;
     }
   }
 }
@@ -38,12 +38,10 @@
   transition: all 0.2s ease;
   opacity: 0;
   transform: translateY(-100%);
-  top: 20px;
 }
 .#{$namespace}-message-fade-enter-to,
 .#{$namespace}-message-fade-leave-from {
   transition: all 0.2s ease;
   opacity: 1;
-  top: 20px;
   transform: translateY(0);
 }
