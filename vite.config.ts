@@ -7,6 +7,7 @@ function resolve(dir: string): string {
 }
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: 'MDVUI',
   plugins: [vue()],
   resolve: {
     alias: {
