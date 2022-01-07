@@ -1,5 +1,5 @@
 import { withInstall } from '@mdvui/utils/withInstall'
-import Button from './Button.vue'
+import Button from './src/Button.vue'
 
 const MvButton = withInstall(Button, 'Button')
 
