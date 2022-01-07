@@ -19,6 +19,7 @@
       "@mdvui/plugins/*": ["packages/plugins/*"],
       "@mdvui/hooks/*": ["packages/hooks/*"],
       "@mdvui/tokens/*": ["packages/tokens/*"],
+      "@mdvui/directives/*": ["packages/directives/*"]
     },
   },
   "include": ["packages", "example"],
