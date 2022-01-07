@@ -1,14 +1,12 @@
 /* text */
 .mv-text-color-white {
-  color: #ffffff;
+  color: white;
 }
 .mv-text-color-black {
-  color: #000000;
+  color: black;
 }
 
-/* blue */
-@include createRangeBgColor('blue', $mv-color-blue);
-/* red */
-@include createRangeBgColor('red', $mv-color-red);
-/* green */
-@include createRangeBgColor('green', $mv-color-green);
+/* Create colors */
+@each $key, $value in $color-maps {
+  @include createRangeBgColor($key, $value);
+}

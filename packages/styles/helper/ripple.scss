@@ -1,0 +1,13 @@
+.mv-ripple {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 50%;
+}
+
+@each $key, $value in $color-maps {
+  .mv-ripple-#{$key} {
+    @include createRipple($key, $value);
+  }
+}

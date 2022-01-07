@@ -1,5 +1,3 @@
-@import '../variables/variables.scss';
-
 @mixin createStyles($name) {
   $selector: '#{$namespace}-#{$name}';
 
