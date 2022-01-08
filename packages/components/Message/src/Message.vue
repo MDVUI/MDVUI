@@ -34,7 +34,7 @@ const Style = computed(() => ({
 }))
 
 const error = computed(() => props.type === 'error')
-const info = computed(() => props.type === 'info')
+const info = computed(() => props.type === 'info' || (props.type !== 'success' && props.type !== 'error')))
 const success = computed(() => props.type === 'success')
 
 const render = ref()
