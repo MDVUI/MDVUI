@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { MvMessageFn } from '@mdvui/components/Message'
-import { ref } from 'vue-demi'
+import { ref } from 'vue'
 
 const input = ref()
 
@@ -17,7 +17,7 @@ function message() {
   <div class="mdui-textfield" style="width: 50%; margin: 0 auto">
     <input v-model="input" class="mdui-textfield-input" type="text" placeholder="error | info | success | warning">
   </div>
-  <mv-button class="mv-color-red" :ripple-color="'blue'" @click="message" v-text="'click'" />
+  <mv-button v-ripple class="mv-color-red" @click="message" v-text="'click'" />
 </template>
 
 <style lang="scss">

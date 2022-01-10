@@ -11,7 +11,7 @@
     "@vueuse/core": "^7.5.1",
     "mdui": "^1.0.2",
     "prettier": "^2.5.1",
-    "vue": "^3.2.25",
+    "vue": "^3.2.26",
     "vue-demi": "^0.12.1"
   },
   "devDependencies": {

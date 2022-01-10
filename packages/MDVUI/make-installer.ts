@@ -1,10 +1,10 @@
 import type { App, Plugin } from 'vue-demi'
-import type { MvDirective } from '@mdvui/utils/types'
+import type { MvFunctionDirective, MvObjDirective } from '@mdvui/utils/types'
 import type { ConfigProviderKeyProps } from '../tokens/config-provider'
 import { provideGlobalConfig } from '../hooks/use-global-config'
 import { version } from './version'
 
-export const makeInstaller = (components: Plugin[] = [], directives: MvDirective[]) => {
+export const makeInstaller = (components: Plugin[] = [], directives: MvObjDirective[] | MvFunctionDirective[]) => {
   const install = (app: App, options: ConfigProviderKeyProps = {}) => {
     options.zIndex = options.zIndex || 2000
     provideGlobalConfig(options, app)

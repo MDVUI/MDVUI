@@ -1,6 +1,6 @@
-import RippleDirective from '@mdvui/directives/Ripple'
-import type { MvDirective } from '@mdvui/utils/types'
+import Ripple from '@mdvui/directives/Ripple'
+import type { MvFunctionDirective, MvObjDirective } from '@mdvui/utils/types'
 
 export default [
-  RippleDirective,
-] as MvDirective[]
+  Ripple,
+] as MvObjDirective[] | MvFunctionDirective[]
