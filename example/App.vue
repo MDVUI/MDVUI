@@ -15,12 +15,9 @@ function message() {
 
 <template>
   <div class="mdui-textfield" style="width: 50%; margin: 0 auto">
-    <input v-model="input" class="mdui-textfield-input" type="text" placeholder="error | info | success">
+    <input v-model="input" class="mdui-textfield-input" type="text" placeholder="error | info | success | warning">
   </div>
   <mv-button class="mv-color-red" :ripple-color="'blue'" @click="message" v-text="'click'" />
-  <button v-ripple class="mdui-btn">
-    111
-  </button>
 </template>
 
 <style lang="scss">

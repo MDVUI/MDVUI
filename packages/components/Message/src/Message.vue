@@ -1,13 +1,11 @@
 <script lang='ts' setup>
 import type { VNode } from 'vue-demi'
-import { computed, ref } from 'vue-demi'
-import type { MessagePos, MessageType } from '@mdvui/components/Message/src/message-types'
-import { onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue-demi'
+import type { MessageType } from '@mdvui/components/Message/src/message-types'
 
 export interface IMessageProps {
   id?: number
   type?: MessageType
-  pos?: MessagePos
   duration?: number
   showClose?: boolean
   zIndex?: number
@@ -19,7 +17,6 @@ export interface IMessageProps {
 
 const props = withDefaults(defineProps<IMessageProps>(), {
   type: 'info',
-  pos: 'right-top',
   duration: 3000,
   showClose: false,
   message: '',
@@ -34,8 +31,9 @@ const Style = computed(() => ({
 }))
 
 const error = computed(() => props.type === 'error')
-const info = computed(() => props.type === 'info' || (props.type !== 'success' && props.type !== 'error'))
+const info = computed(() => props.type === 'info' || (props.type !== 'success' && props.type !== 'error' && props.type !== 'warning'))
 const success = computed(() => props.type === 'success')
+const warning = computed(() => props.type === 'warning')
 
 const render = ref()
 onMounted(() => {
@@ -71,10 +69,11 @@ function close() {
         info ? 'mv-color-blue': '',
         error ? 'mv-color-red': '',
         success ? 'mv-color-green': '',
+        warning ? 'mv-color-orange': ''
       ]"
       :style="Style"
     >
-      <i class="mdui-icon material-icons" v-html="error || info ? 'info': 'done'" />
+      <i class="mdui-icon material-icons" v-html="error || info ? 'info': warning ? 'warning' : 'done'" />
       <div class="mv-alert-tip-slot">
         {{ message }}
       </div>

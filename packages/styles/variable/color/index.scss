@@ -1,9 +1,13 @@
 @import 'red';
 @import 'blue';
 @import 'green';
+@import 'yellow';
+@import 'orange';
 
 $color-maps: (
   red: $mv-color-red,
   blue: $mv-color-blue,
   green: $mv-color-green,
+  yellow: $mv-color-yellow,
+  orange: $mv-color-orange,
 );
