@@ -62,7 +62,7 @@ function close() {
     @after-leave="destroy"
   >
     <div
-      v-show="render"
+      v-if="render"
       ref="rootRef"
       class="mv-message mv-text-color-white mv-shadow-3"
       :class="[

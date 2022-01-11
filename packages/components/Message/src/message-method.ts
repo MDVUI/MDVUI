@@ -9,7 +9,11 @@ interface MessageOptions extends IMessageProps {
   appendTo?: HTMLElement | string
 }
 
-let instances: VNode[] = []
+interface MessageVNode extends VNode{
+  container?: HTMLElement
+}
+
+let instances: MessageVNode[] = []
 let seed = 0
 
 const message = (options: MessageOptions | string) => {
@@ -45,7 +49,7 @@ const message = (options: MessageOptions | string) => {
   const container = document.createElement('div')
   container.className = 'mv-message-container'
 
-  const vm = createVNode(
+  const vm: MessageVNode = createVNode(
     MessageConstructor,
     props,
     isVNode(props.message) ? { default: () => props.message } : null,
@@ -55,6 +59,7 @@ const message = (options: MessageOptions | string) => {
     render(null, container)
   }
 
+  vm.container = container
   instances.push(vm)
   render(vm, container)
 
@@ -75,6 +80,7 @@ export const close = (vmId: number) => {
   const vm = instances[idx]
   const removedHeight = vm.el!.offsetHeight
 
+  instances[idx].container!.remove()
   instances.splice(idx, 1)
 
   const len = instances.length
