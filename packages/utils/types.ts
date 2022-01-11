@@ -14,6 +14,10 @@ export interface MvFunctionDirective extends FunctionDirective {
 }
 
 export interface MvDirectiveHTMLElement extends HTMLElement {
-  ripple?: boolean
+  ripple?: MvRippleElement
   rippleColor?: string
+}
+
+export interface MvRippleElement extends HTMLElement {
+  seed?: number
 }
