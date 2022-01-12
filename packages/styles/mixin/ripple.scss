@@ -1,5 +1,5 @@
 @mixin createRipple($color, $mv-color) {
   $color: map-get($mv-color, light-1);
-  background-color: $color;
-  opacity: 0.3;
+  background-color: rgba($color, 0.3) !important;
+  opacity: 0;
 }

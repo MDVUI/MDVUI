@@ -17,7 +17,12 @@ function message() {
   <div class="mdui-textfield" style="width: 50%; margin: 0 auto">
     <input v-model="input" class="mdui-textfield-input" type="text" placeholder="error | info | success | warning">
   </div>
-  <mv-button v-ripple class="mv-color-red" @click="message" v-text="'click'" />
+  <div class="btn">
+    <mv-button v-ripple="'red'" class="mv-color-red" @click="message" v-text="'add message'" />
+    <mv-button v-ripple="'black'" style="width: 500px; height: 500px" class="mv-color-red">
+      Ripple
+    </mv-button>
+  </div>
 </template>
 
 <style lang="scss">
@@ -29,6 +34,12 @@ function message() {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-
+  .btn {
+    position: relative;
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 </style>

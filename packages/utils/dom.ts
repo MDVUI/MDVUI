@@ -9,7 +9,7 @@ export const removeDom = <T extends MaybeRef<HTMLElement>>(el: T) => {
   }
 }
 
-export const addClass = <T extends MaybeRef<HTMLElement>>(
+export const addClass = <T extends MaybeRef<HTMLElement | Element>>(
   el: T,
   clsName: string,
 ) => {
@@ -20,7 +20,7 @@ export const addClass = <T extends MaybeRef<HTMLElement>>(
   unrefEl.classList.add(clsName)
 }
 
-export const removeClass = <T extends MaybeRef<HTMLElement>>(
+export const removeClass = <T extends MaybeRef<HTMLElement | Element>>(
   el: T,
   clsName: string,
 ) => {
