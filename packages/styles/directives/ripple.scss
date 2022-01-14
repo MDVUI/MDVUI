@@ -14,7 +14,6 @@
     border-radius: 50%;
     background-color: rgba(black, 0.3) !important;
     opacity: 0;
-    transform: scale(0);
     will-change: transform, opacity;
     user-select: none;
     @each $key, $value in $color-maps {
@@ -28,7 +27,7 @@
     }
     &-in {
       opacity: 0.3;
-      transition: all 1000ms;
+      transition: all 3000ms;
     }
     &-out {
       opacity: 0;

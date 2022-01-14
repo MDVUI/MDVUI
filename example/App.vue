@@ -19,7 +19,7 @@ function message() {
   </div>
   <div class="btn">
     <mv-button v-ripple="'red'" class="mv-color-red" @click="message" v-text="'add message'" />
-    <mv-button v-ripple="'black'" style="width: 500px; height: 500px" class="mv-color-red">
+    <mv-button v-ripple="'black'" style="width: 300px; height: 200px" class="mv-color-red">
       Ripple
     </mv-button>
   </div>

@@ -7,9 +7,15 @@ import { Device, cloneArray, getCurrentDevice } from '@mdvui/utils/utils'
 
 type MvRippleEvent = MouseEvent | TouchEvent
 
+interface AnimationsTransform {
+  translateX: number
+  translateY: number
+  scale: number
+}
+
 interface Animations {
   el: HTMLElement
-  scale: number
+  transform: AnimationsTransform
 }
 
 const instances: MvRippleElement[] = []
@@ -30,12 +36,13 @@ function removeRipple(
   // Ensure animation can be triggered
   useMount(() => {
     const currentAnimation = animations[animations.length - 1]
-    currentAnimation.el.style.transitionDuration = '600ms'
-    currentAnimation.el.style.transform = 'scale(1)'
+    const transform = currentAnimation.transform
+    currentAnimation.el.style.transitionDuration = '300ms'
+    currentAnimation.el.style.transform = `translate3d(${transform.translateX}px, ${transform.translateY}px, 0) scale(${transform.scale + 2})`
     // After 600ms, the ripple animation will be closed
     setTimeout(() => {
       hideRipple(rootEl, currentAnimation.el, rootEl.ripple as MvRippleElement)
-    }, 600)
+    }, 300)
   })
 }
 
@@ -44,34 +51,31 @@ const calculate = (
   el: MvDirectiveHTMLElement,
 ) => {
   const target = isTouchEvent(e) ? e.touches[e.touches.length - 1] : e
-  const offsetX = target.pageX - el.getBoundingClientRect().x
-  const offsetY = target.pageY - el.getBoundingClientRect().y
-  const elMaxSide = el.clientWidth > el.clientHeight ? el.clientWidth : el.clientHeight
-  const elMinSide = el.clientWidth > el.clientHeight ? el.clientHeight : el.clientWidth
+  const elWidth = el.clientWidth
+  const elHeight = el.clientHeight
+  const elMaxSide = (elWidth > elHeight ? elWidth : elHeight)
+  const diameter = elMaxSide / 10
+  const clickX = target.clientX - el.getBoundingClientRect().x
+  const clickY = target.clientY - el.getBoundingClientRect().y
 
-  let centerX
-  let centerY
-  let radius = elMinSide * 2
-  let scale = 0.8
-
-  centerX = offsetX - radius / 2
-  centerY = offsetY - radius / 2
-  scale += elMaxSide / radius
+  const scale = 13
+  const translateX = elWidth / 2 - clickX + diameter / 2
+  const translateY = elHeight / 2 - clickY + diameter / 2
 
   return {
-    offsetX,
-    offsetY,
-    centerX,
-    centerY,
-    radius,
+    clickX,
+    clickY,
+    diameter,
+    translateX,
+    translateY,
     scale,
   }
 }
 
 const showRipple = (e: MvRippleEvent) => {
   const el = e.currentTarget as MvDirectiveHTMLElement || undefined
-  // Ripple is triggered only once before hiding
-  if (!el || (getCurrentDevice() === Device.phone)) {
+  // Make sure that only TouchEvent can be triggered when using phone or pad
+  if (!el || ((getCurrentDevice() === Device.phone) && e.type === 'mousedown')) {
     return
   }
 
@@ -80,10 +84,10 @@ const showRipple = (e: MvRippleEvent) => {
     return
   }
 
-  const { centerX, centerY, scale, radius } = calculate(e, el)
+  const { clickX, clickY, diameter, translateX, translateY, scale } = calculate(e, el)
   const container = document.createElement('div')
   const animation = document.createElement('div')
-  const initialSize = `${radius}px`
+  const initialSize = `${diameter}px`
 
   container.className = 'mv-ripple'
   animation.className = `mv-ripple-animation mv-ripple-animation-in mv-ripple-animation-color-${el.rippleColor}`
@@ -91,9 +95,9 @@ const showRipple = (e: MvRippleEvent) => {
 
   animation.style.width = initialSize
   animation.style.height = initialSize
-  animation.style.transition = 'all 3000ms'
-  animation.style.left = `${centerX}px`
-  animation.style.top = `${centerY}px`
+  animation.style.transform = 'translate3d(0, 0, 0) scale(1)'
+  animation.style.left = `${clickX - diameter / 2}px`
+  animation.style.top = `${clickY - diameter / 2}px`
 
   append(el, container)
 
@@ -101,12 +105,17 @@ const showRipple = (e: MvRippleEvent) => {
   el.ripple.seed = seed++
 
   instances.push(el.ripple)
+
   animations.push({
     el: animation,
-    scale,
+    transform: {
+      translateX,
+      translateY,
+      scale,
+    },
   })
   useMount(() => {
-    animation.style.transform = `scale(${scale})`
+    animation.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`
   })
 }
 

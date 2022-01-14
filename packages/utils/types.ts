@@ -21,3 +21,9 @@ export interface MvDirectiveHTMLElement extends HTMLElement {
 export interface MvRippleElement extends HTMLElement {
   seed?: number
 }
+
+export interface MvNavigator extends Navigator {
+  userAgentData: {
+    platform: string
+  }
+}

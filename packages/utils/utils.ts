@@ -1,4 +1,4 @@
-export const maxDevice = 412
+import type { MvNavigator } from '@mdvui/utils/types'
 
 export const sliceArray = <T>(arr: T[], index: number): T[] => {
   return arr.filter((item, i) => i !== index)
@@ -19,5 +19,9 @@ export const enum Device {
   pc =1
 }
 export const getCurrentDevice = (): Device => {
-  return window.innerWidth < maxDevice ? Device.phone : Device.pc
+  if ((navigator as MvNavigator).userAgentData.platform === 'Windows' || (navigator as MvNavigator).userAgentData.platform === 'macOS') {
+    return Device.pc
+  }
+
+  return Device.phone
 }
