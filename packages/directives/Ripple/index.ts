@@ -30,6 +30,18 @@ function isTouchEvent(e: MvRippleEvent): e is TouchEvent {
   return e.constructor.name === 'TouchEvent'
 }
 
+function updateColorWhenClasslistChange(el: MvDirectiveHTMLElement) {
+  if (el.rippleColor === 'white' || el.rippleColor === 'black' || el.rippleColor === undefined) {
+    let defaultColor = 'black'
+    el.classList.forEach((clsName) => {
+      if (clsName.includes('mv-color-')) {
+        defaultColor = 'white'
+      }
+    })
+    el.rippleColor = defaultColor
+  }
+}
+
 function removeRipple(
   rootEl: MvDirectiveHTMLElement,
 ) {
@@ -83,6 +95,8 @@ const showRipple = (e: MvRippleEvent) => {
     removeRipple(el)
     return
   }
+
+  updateColorWhenClasslistChange(el)
 
   const { clickX, clickY, diameter, translateX, translateY, scale } = calculate(e, el)
   const container = document.createElement('div')
@@ -149,8 +163,7 @@ const updateRipple = <T extends MvDirectiveHTMLElement>(
   el: T,
   binding: DirectiveBinding,
 ) => {
-  const color = binding.value || 'white'
-  el.rippleColor = color
+  el.rippleColor = binding.value
   useEventListener(el, 'mousedown', showRipple)
   useEventListener(el, 'mouseup', showRipple)
   useEventListener(el, 'touchstart', showRipple)

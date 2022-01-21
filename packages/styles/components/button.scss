@@ -33,6 +33,6 @@
     background-color: rgba(0, 0, 0, 0.1);
   }
   &[class*='#{$namespace}-color-']:hover {
-    opacity: 0.87;
+    opacity: 0.95;
   }
 }
