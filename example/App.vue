@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { MvMessageFn } from '@mdvui/components/Message'
 import { ref } from 'vue'
+import type { MessageType } from '@mdvui/components/Message/src/message-types'
 
-const input = ref('')
+const input = ref<MessageType>('info')
 
 function message() {
   MvMessageFn({
     duration: 2000,
     message: 'Test',
-    type: input.value,
+    type: input.value || 'info',
   })
 }
 </script>

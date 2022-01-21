@@ -2,7 +2,7 @@ import type { MvDirectiveHTMLElement, MvFunctionDirective, MvRippleElement } fro
 import type { DirectiveBinding } from 'vue-demi'
 import { useEventListener } from '@vueuse/core'
 import { addClass, removeClass } from '@mdvui/utils/dom'
-import { useMount } from '@mdvui/hooks/use-mount'
+import useMicrotasksMount from '@mdvui/hooks/use-mircotasks-mount'
 import { Device, cloneArray, getCurrentDevice } from '@mdvui/utils/utils'
 
 type MvRippleEvent = MouseEvent | TouchEvent
@@ -46,7 +46,7 @@ function removeRipple(
   rootEl: MvDirectiveHTMLElement,
 ) {
   // Ensure animation can be triggered
-  useMount(() => {
+  useMicrotasksMount(() => {
     const currentAnimation = animations[animations.length - 1]
     const transform = currentAnimation.transform
     currentAnimation.el.style.transitionDuration = '300ms'
@@ -134,7 +134,7 @@ const showRipple = (e: MvRippleEvent) => {
       scale,
     },
   })
-  useMount(() => {
+  useMicrotasksMount(() => {
     animation.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`
   })
 }
