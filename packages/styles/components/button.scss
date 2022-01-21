@@ -1,0 +1,38 @@
+@include createStyles('btn') {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  min-width: 88px;
+  height: $button-height;
+  margin: 0;
+  padding: 0 16px;
+  overflow: hidden;
+  color: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: $button-height;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  vertical-align: middle;
+  background: transparent;
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s $animation-curve-default, box-shadow 0.2s $animation-curve-fast-out-linear-in;
+  user-select: none;
+
+  // 移除点击延迟触发
+  touch-action: manipulation;
+  will-change: box-shadow;
+  zoom: 1;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  &[class*='#{$namespace}-color-']:hover {
+    opacity: 0.87;
+  }
+}

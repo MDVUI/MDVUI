@@ -4,7 +4,7 @@
 
 <template>
   <button
-    class="mdui-btn mv-color-blue mdui-text-color-white"
+    class="mv-btn mv-color-blue mdui-text-color-white"
     :class="[
       `mv-shadow-2`
     ]"
