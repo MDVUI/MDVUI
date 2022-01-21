@@ -2,7 +2,7 @@
 import { MvMessageFn } from '@mdvui/components/Message'
 import { ref } from 'vue'
 
-const input = ref()
+const input = ref('')
 
 function message() {
   MvMessageFn({
