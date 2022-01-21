@@ -3,7 +3,7 @@ import type { SFCWithInstall } from '@mdvui/utils/types'
 
 export const withInstall = <T>(main: T, name: string): SFCWithInstall<T> => {
   (main as SFCWithInstall<T>).install = (app: App) => {
-    app.component(`Mv${name}`, main)
+    app.component(`M${name}`, main)
   }
   return main as SFCWithInstall<T>
 }

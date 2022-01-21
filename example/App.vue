@@ -18,11 +18,12 @@ function message() {
     <input v-model="input" class="mdui-textfield-input" type="text" placeholder="error | info | success | warning">
   </div>
   <div class="btn">
-    <mv-button v-ripple="'red'" class="mv-color-red" @click="message" v-text="'add message'" />
-    <mv-button v-ripple="'black'" style="width: 300px; height: 200px" class="mv-color-red">
+    <m-button v-ripple="'red'" class="mv-color-red" @click="message" v-text="'add message'" />
+    <m-button v-ripple="'black'" style="width: 300px; height: 200px" class="mv-color-red">
       Ripple
-    </mv-button>
+    </m-button>
   </div>
+  <m-icon class="mv-icon mv-icon-horizontal_split" />
 </template>
 
 <style lang="scss">
