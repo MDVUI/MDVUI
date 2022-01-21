@@ -30,7 +30,7 @@ function isTouchEvent(e: MvRippleEvent): e is TouchEvent {
   return e.constructor.name === 'TouchEvent'
 }
 
-function updateColorWhenClasslistChange(el: MvDirectiveHTMLElement) {
+function updateColor(el: MvDirectiveHTMLElement) {
   if (el.rippleColor === 'white' || el.rippleColor === 'black' || el.rippleColor === undefined) {
     let defaultColor = 'black'
     el.classList.forEach((clsName) => {
@@ -96,7 +96,13 @@ const showRipple = (e: MvRippleEvent) => {
     return
   }
 
-  updateColorWhenClasslistChange(el)
+  /**
+   * When the user does not set the ripple color,
+   * make sure that when the background-color of the el changes,
+   * the ripple color will adapt to the change
+   *
+   */
+  updateColor(el)
 
   const { clickX, clickY, diameter, translateX, translateY, scale } = calculate(e, el)
   const container = document.createElement('div')
