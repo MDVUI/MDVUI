@@ -20,6 +20,7 @@
         @include createRipple($key, $value);
       }
     }
+
     &-color-black {
       background-color: rgba(black, 0.3) !important;
     }

@@ -151,7 +151,7 @@ const hideRipple = (
 
   setTimeout(() => {
     const idx = cloneIns.findIndex(vm => vm.seed === rippleEl.seed)
-    // Ensure all useless ripples will be remove
+    // Ensure all useless ripples will be removew
     cloneIns.forEach((cVm, index) => {
       if (index <= idx) {
         const cVmAnimation = cVm.firstElementChild as Element
@@ -159,10 +159,10 @@ const hideRipple = (
         addClass(cVmAnimation, 'mv-ripple-animation-out')
         setTimeout(() => {
           cVm.remove()
-        }, 600)
+        }, 300)
       }
     })
-  }, 600)
+  }, 300)
 }
 
 const updateRipple = <T extends MvDirectiveHTMLElement>(

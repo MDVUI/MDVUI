@@ -27,3 +27,7 @@ export interface MvNavigator extends Navigator {
     platform: string
   }
 }
+
+export interface MvComponentProps {
+  color?: string
+}
