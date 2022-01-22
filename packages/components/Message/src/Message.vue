@@ -13,6 +13,7 @@ export interface IMessageProps {
   offset?: number
   onDestroy?: () => void
   onClose?: () => void
+  color?: string
 }
 
 const props = withDefaults(defineProps<IMessageProps>(), {
@@ -69,7 +70,8 @@ function close() {
         info ? 'mv-color-blue': '',
         error ? 'mv-color-red': '',
         success ? 'mv-color-green': '',
-        warning ? 'mv-color-orange': ''
+        warning ? 'mv-color-orange': '',
+        typeof color !== 'undefined' ? `mv-color-${color}` : ''
       ]"
       :style="Style"
     >
