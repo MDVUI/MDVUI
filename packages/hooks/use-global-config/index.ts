@@ -10,28 +10,19 @@ import { ConfigProviderKey } from '../../tokens/config-provider'
 
 const defaultInject = ref<ConfigProviderKeyProps>({})
 
-export function useGlobalConfig<T extends keyof ConfigProviderKeyProps>(
-  key: T
-): Ref<ConfigProviderKeyProps[T]>
+export function useGlobalConfig<T extends keyof ConfigProviderKeyProps>(key: T): Ref<ConfigProviderKeyProps[T]>
 export function useGlobalConfig(): Ref<ExtractConfigProviderProps>
-export function useGlobalConfig<T extends keyof ConfigProviderKeyProps>(
-  key?: T,
-) {
+export function useGlobalConfig<T extends keyof ConfigProviderKeyProps>(key?: T) {
   const config = inject(ConfigProviderKey, defaultInject) || defaultInject
 
   if (key) {
-    return isObject(config.value) && hasOwn(config.value, key)
-      ? computed(() => config.value[key])
-      : undefined
+    return isObject(config.value) && hasOwn(config.value, key) ? computed(() => config.value[key]) : undefined
   } else {
     return config as Ref<ConfigProviderKeyProps[T]>
   }
 }
 
-export const provideGlobalConfig = (
-  config: MaybeRef<ConfigProviderKeyProps>,
-  app?: App,
-) => {
+export const provideGlobalConfig = (config: MaybeRef<ConfigProviderKeyProps>, app?: App) => {
   const inSetup = !!getCurrentInstance()
 
   if (!inSetup) {
