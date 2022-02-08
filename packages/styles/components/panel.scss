@@ -1,0 +1,57 @@
+.vm-panel {
+  &-item {
+    margin-top: 0;
+    margin-bottom: 0;
+    will-change: margin;
+    background-color: #fff;
+    color: rgba(0, 0, 0, 0.87);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    transition: margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+
+    &__title {
+      height: 48px;
+      display: flex;
+      padding: 0 24px;
+      font-size: 15px;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+      white-space: nowrap;
+      align-items: center;
+      box-sizing: border-box;
+      text-overflow: ellipsis;
+
+      &--text {
+        width: 100%;
+        text-align: left;
+      }
+
+      &--icon {
+        transition: transform 0.3s;
+      }
+    }
+
+    &__content {
+      padding: 0 24px;
+    }
+
+    &__footer {
+      text-align: right;
+      box-sizing: border-box;
+      padding: 16px 24px 0 24px;
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    &.is-active {
+      margin-top: 16px;
+      margin-bottom: 16px;
+
+      & > .vm-panel-item__title {
+        .vm-panel-item__title--icon {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}

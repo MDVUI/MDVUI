@@ -2,10 +2,13 @@
   font-family: 'icon';
 
   src: url('@mdvui/styles/components/Icon/iconfont2.woff') format('woff2'),
-    url('@mdvui/styles/components/Icon/iconfont3.woff2') format('woff'),
-    url('@mdvui/styles/components/Icon/iconfont1.ttf') format('truetype');
+  url('@mdvui/styles/components/Icon/iconfont3.woff2') format('woff'),
+  url('@mdvui/styles/components/Icon/iconfont1.ttf') format('truetype');
 }
-.mv-icon {
+
+.mv-icon,
+i[class^="mv-icon-"],
+i[class*=" mv-icon-"] {
   font-family: 'icon' !important;
   font-size: 20px;
   font-style: normal;
